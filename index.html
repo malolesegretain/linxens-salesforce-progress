@@ -249,6 +249,27 @@
         background: rgba(255, 250, 241, 0.96);
       }
 
+      .panel--highlight {
+        background:
+          linear-gradient(135deg, rgba(189, 77, 44, 0.16), rgba(200, 139, 43, 0.14)),
+          rgba(255, 247, 238, 0.98);
+        border: 1px solid rgba(189, 77, 44, 0.24);
+        box-shadow: 0 28px 80px rgba(122, 56, 32, 0.16);
+      }
+
+      .panel--highlight .tag {
+        background: rgba(127, 49, 26, 0.14);
+        color: var(--accent-deep);
+      }
+
+      .panel--highlight h3 {
+        font-size: 2rem;
+      }
+
+      .panel--highlight ul {
+        font-size: 1.02rem;
+      }
+
       .panel .tag {
         display: inline-block;
         padding: 7px 12px;
@@ -294,6 +315,7 @@
         background: rgba(255, 248, 237, 0.76);
         border-radius: 18px;
         border: 1px solid rgba(20, 34, 24, 0.08);
+        position: relative;
       }
 
       .timeline-step span {
@@ -318,6 +340,37 @@
         margin: 0;
         color: var(--muted);
         line-height: 1.6;
+      }
+
+      .timeline-step--current {
+        background:
+          linear-gradient(180deg, rgba(95, 111, 82, 0.18), rgba(95, 111, 82, 0.08)),
+          rgba(255, 250, 241, 0.98);
+        border: 2px solid rgba(95, 111, 82, 0.42);
+        box-shadow: 0 20px 48px rgba(95, 111, 82, 0.18);
+        transform: translateY(-8px);
+      }
+
+      .timeline-step--current span {
+        background: var(--olive);
+        width: 36px;
+        height: 36px;
+        font-weight: 700;
+      }
+
+      .timeline-step--current::after {
+        content: "Current phase";
+        position: absolute;
+        top: 18px;
+        right: 18px;
+        padding: 7px 11px;
+        border-radius: 999px;
+        background: rgba(95, 111, 82, 0.14);
+        color: #324129;
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
       }
 
       .quote-banner {
@@ -558,7 +611,7 @@
               </ul>
             </article>
 
-            <article class="panel reveal delay-5">
+            <article class="panel panel--highlight reveal delay-5">
               <div class="tag">Impact</div>
               <h3>What sales teams gain</h3>
               <p>
@@ -612,15 +665,6 @@
                 <li>Embed the new operating model across teams</li>
               </ul>
             </article>
-
-            <article class="panel reveal delay-3">
-              <div class="tag">Deployment logic</div>
-              <h3>Controlled deployment, not experimentation</h3>
-              <p>
-                The operating model is straightforward: standardize first, release to
-                production once stable, then drive adoption through rollout.
-              </p>
-            </article>
           </div>
 
           <div class="timeline reveal delay-4">
@@ -640,7 +684,7 @@
                 <h3>Deploy</h3>
                 <p>Release to production once it is ready to support business usage.</p>
               </div>
-              <div class="timeline-step">
+              <div class="timeline-step timeline-step--current">
                 <span>4</span>
                 <h3>Adopt</h3>
                 <p>Drive rollout so the business captures the value consistently.</p>
