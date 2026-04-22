@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Linxens Salesforce Progress Update</title>
+    <meta
+      name="description"
+      content="Executive summary of Salesforce progress at Linxens since January 2026."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #f4efe6;
+        --bg-strong: #e7dcc8;
+        --surface: rgba(255, 250, 241, 0.84);
+        --surface-strong: #fff8ed;
+        --ink: #142218;
+        --muted: #5f675f;
+        --line: rgba(20, 34, 24, 0.12);
+        --accent: #bd4d2c;
+        --accent-soft: #f1d5c8;
+        --accent-deep: #7f311a;
+        --olive: #5f6f52;
+        --gold: #c88b2b;
+        --shadow: 0 24px 80px rgba(64, 42, 19, 0.12);
+        --radius: 24px;
+        --max: 1180px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        font-family: "IBM Plex Sans", sans-serif;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at top left, rgba(200, 139, 43, 0.16), transparent 28%),
+          radial-gradient(circle at 85% 10%, rgba(95, 111, 82, 0.14), transparent 26%),
+          linear-gradient(180deg, #f8f3eb 0%, var(--bg) 48%, #f8f4ef 100%);
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(20, 34, 24, 0.028) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(20, 34, 24, 0.028) 1px, transparent 1px);
+        background-size: 44px 44px;
+        pointer-events: none;
+        mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.28), rgba(0, 0, 0, 0.08));
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .shell {
+        width: min(calc(100% - 32px), var(--max));
+        margin: 0 auto;
+        position: relative;
+      }
+
+      .hero {
+        padding: 88px 0 40px;
+        position: relative;
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.85fr);
+        gap: 28px;
+        align-items: stretch;
+      }
+
+      .hero-card,
+      .panel,
+      .timeline,
+      .footer-card {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        backdrop-filter: blur(12px);
+        box-shadow: var(--shadow);
+      }
+
+      .hero-card {
+        padding: 36px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero-card::after {
+        content: "";
+        position: absolute;
+        width: 240px;
+        height: 240px;
+        border-radius: 999px;
+        right: -80px;
+        top: -80px;
+        background: radial-gradient(circle, rgba(189, 77, 44, 0.24), transparent 68%);
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 14px;
+        border-radius: 999px;
+        background: rgba(20, 34, 24, 0.06);
+        color: var(--muted);
+        font-size: 0.82rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .eyebrow::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        border-radius: 999px;
+        background: var(--accent);
+      }
+
+      h1,
+      h2,
+      h3 {
+        font-family: "Fraunces", serif;
+        line-height: 0.98;
+        letter-spacing: -0.03em;
+        margin: 0;
+      }
+
+      h1 {
+        font-size: clamp(3.1rem, 7vw, 6.2rem);
+        margin-top: 22px;
+        max-width: 12ch;
+      }
+
+      .hero-copy {
+        margin-top: 22px;
+        max-width: 60ch;
+        color: var(--muted);
+        font-size: 1.05rem;
+        line-height: 1.65;
+      }
+
+      .hero-kpis {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+        margin-top: 28px;
+      }
+
+      .kpi {
+        padding: 18px;
+        border-radius: 18px;
+        background: rgba(255, 248, 237, 0.88);
+        border: 1px solid rgba(20, 34, 24, 0.08);
+      }
+
+      .kpi strong {
+        display: block;
+        font-size: 1.5rem;
+        margin-bottom: 6px;
+      }
+
+      .kpi span {
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      .signal-card {
+        padding: 28px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .signal-card h2 {
+        font-size: clamp(1.9rem, 4vw, 3rem);
+      }
+
+      .signal-card p {
+        margin: 12px 0 0;
+        color: var(--muted);
+        line-height: 1.65;
+      }
+
+      .signal-list {
+        margin: 22px 0 0;
+        padding: 0;
+        list-style: none;
+        display: grid;
+        gap: 12px;
+      }
+
+      .signal-list li {
+        padding: 14px 16px;
+        border-radius: 16px;
+        background: rgba(95, 111, 82, 0.08);
+        border: 1px solid rgba(95, 111, 82, 0.1);
+      }
+
+      main {
+        padding: 12px 0 80px;
+      }
+
+      .section-heading {
+        display: grid;
+        grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+        gap: 28px;
+        align-items: end;
+        margin: 36px 0 20px;
+      }
+
+      .section-heading p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.65;
+      }
+
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      .panel {
+        padding: 24px;
+        transition: transform 260ms ease, border-color 260ms ease, background 260ms ease;
+      }
+
+      .panel:hover {
+        transform: translateY(-3px);
+        border-color: rgba(189, 77, 44, 0.25);
+        background: rgba(255, 250, 241, 0.96);
+      }
+
+      .panel .tag {
+        display: inline-block;
+        padding: 7px 12px;
+        border-radius: 999px;
+        font-size: 0.74rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        background: var(--accent-soft);
+        color: var(--accent-deep);
+      }
+
+      .panel h3 {
+        font-size: 1.7rem;
+        margin-top: 16px;
+      }
+
+      .panel p {
+        color: var(--muted);
+        line-height: 1.65;
+        margin: 14px 0 0;
+      }
+
+      .panel ul {
+        margin: 18px 0 0;
+        padding-left: 18px;
+        color: var(--ink);
+        line-height: 1.65;
+      }
+
+      .timeline {
+        margin-top: 22px;
+        padding: 28px;
+      }
+
+      .timeline-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .timeline-step {
+        padding: 18px;
+        background: rgba(255, 248, 237, 0.76);
+        border-radius: 18px;
+        border: 1px solid rgba(20, 34, 24, 0.08);
+      }
+
+      .timeline-step span {
+        display: inline-flex;
+        width: 30px;
+        height: 30px;
+        align-items: center;
+        justify-content: center;
+        border-radius: 999px;
+        background: var(--ink);
+        color: #fff;
+        font-size: 0.9rem;
+        margin-bottom: 14px;
+      }
+
+      .timeline-step h3 {
+        font-size: 1.25rem;
+        margin-bottom: 8px;
+      }
+
+      .timeline-step p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      .quote-banner {
+        margin: 26px 0;
+        padding: 26px 28px;
+        border-left: 6px solid var(--accent);
+        background: linear-gradient(135deg, rgba(255, 248, 237, 0.96), rgba(241, 213, 200, 0.9));
+        border-radius: 22px;
+        box-shadow: var(--shadow);
+      }
+
+      .quote-banner p {
+        margin: 0;
+        font-family: "Fraunces", serif;
+        font-size: clamp(1.5rem, 3vw, 2.4rem);
+        line-height: 1.12;
+      }
+
+      .footer-card {
+        margin-top: 28px;
+        padding: 24px;
+        display: grid;
+        grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+        gap: 28px;
+      }
+
+      .footer-card p,
+      .footer-card li {
+        color: var(--muted);
+        line-height: 1.65;
+      }
+
+      .footer-card ul {
+        margin: 10px 0 0;
+        padding-left: 18px;
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(20px);
+        animation: rise 680ms ease forwards;
+      }
+
+      .delay-1 { animation-delay: 80ms; }
+      .delay-2 { animation-delay: 160ms; }
+      .delay-3 { animation-delay: 240ms; }
+      .delay-4 { animation-delay: 320ms; }
+      .delay-5 { animation-delay: 400ms; }
+
+      @keyframes rise {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 980px) {
+        .hero-grid,
+        .section-heading,
+        .footer-card,
+        .cards,
+        .timeline-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .hero-kpis {
+          grid-template-columns: 1fr;
+        }
+
+        h1 {
+          max-width: none;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .shell {
+          width: min(calc(100% - 20px), var(--max));
+        }
+
+        .hero {
+          padding-top: 58px;
+        }
+
+        .hero-card,
+        .signal-card,
+        .panel,
+        .timeline,
+        .footer-card {
+          padding: 20px;
+          border-radius: 20px;
+        }
+
+        .quote-banner {
+          padding: 20px;
+          border-radius: 18px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shell">
+      <header class="hero">
+        <div class="hero-grid">
+          <section class="hero-card reveal">
+            <div class="eyebrow">Linxens executive update</div>
+            <h1>Salesforce is becoming a revenue workflow.</h1>
+            <p class="hero-copy">
+              Since January 2026, the focus has been to reduce friction for sales teams,
+              standardize commercial execution, and improve management visibility from
+              opportunity creation to realized sales. The redesigned Opportunity-to-Quote
+              process is now live in production.
+            </p>
+            <div class="hero-kpis">
+              <div class="kpi">
+                <strong>Since Jan 2026</strong>
+                <span>Clear business progress, not isolated system changes</span>
+              </div>
+              <div class="kpi">
+                <strong>Now live</strong>
+                <span>Redesigned Opportunity-to-Quote flow in production</span>
+              </div>
+              <div class="kpi">
+                <strong>Next phase</strong>
+                <span>Adoption, optimization, and management visibility</span>
+              </div>
+            </div>
+          </section>
+
+          <aside class="signal-card panel reveal delay-1">
+            <div>
+              <div class="tag">What management needs to know</div>
+              <h2>More speed. More consistency. More visibility.</h2>
+              <p>
+                The value is business-first: easier execution for sales teams,
+                better commercial discipline, and a stronger link between pipeline
+                activity and actual sales outcomes.
+              </p>
+            </div>
+            <ul class="signal-list">
+              <li>No more Excel-based work for the core flow</li>
+              <li>Less unnecessary back-and-forth with CTI and Master Data</li>
+              <li>Less administrative burden for sales</li>
+              <li>Better traceability from client interaction to realized sales</li>
+            </ul>
+          </aside>
+        </div>
+      </header>
+
+      <main>
+        <section>
+          <div class="section-heading reveal delay-1">
+            <div>
+              <div class="eyebrow">What changed</div>
+              <h2>Five business changes matter most.</h2>
+            </div>
+            <p>
+              The latest production step is not a cosmetic update. It is a structural
+              improvement to how teams create opportunities, add products, prepare quotes,
+              and connect commercial activity to business results.
+            </p>
+          </div>
+
+          <div class="cards">
+            <article class="panel reveal delay-1">
+              <div class="tag">1</div>
+              <h3>Faster opportunity creation</h3>
+              <p>
+                Opportunity creation is better aligned with how sales teams actually work,
+                reducing friction at the start of the commercial cycle.
+              </p>
+              <ul>
+                <li>Cleaner entry into the pipeline</li>
+                <li>Faster qualification</li>
+                <li>Less time lost in corrections and setup</li>
+              </ul>
+            </article>
+
+            <article class="panel reveal delay-2">
+              <div class="tag">2</div>
+              <h3>Simpler product creation</h3>
+              <p>
+                A guided workflow now allows product creation directly in the commercial
+                flow, replacing a heavier side process and reducing manual handoffs and
+                unnecessary coordination.
+              </p>
+              <ul>
+                <li>No more Excel-based work for the core process</li>
+                <li>Less unnecessary back-and-forth with CTI and Master Data</li>
+                <li>Less back-and-forth</li>
+                <li>Better user experience for sales</li>
+                <li>Faster preparation of offers</li>
+              </ul>
+            </article>
+
+            <article class="panel reveal delay-3">
+              <div class="tag">3</div>
+              <h3>Standardized quote process</h3>
+              <p>
+                Quotes are now structured in a more consistent way, improving commercial
+                quality and making the data more useful for management review.
+              </p>
+              <ul>
+                <li>Better consistency across teams</li>
+                <li>Stronger reporting foundation</li>
+                <li>Less ambiguity in commercial documents</li>
+              </ul>
+            </article>
+
+            <article class="panel reveal delay-4">
+              <div class="tag">4</div>
+              <h3>End-to-end traceability</h3>
+              <p>
+                Management can now begin connecting pipeline intent with realized sales
+                outcomes, making it possible to answer which opportunities generated
+                which sales.
+              </p>
+              <ul>
+                <li>Better visibility for BU heads</li>
+                <li>Clearer understanding of incoming revenue</li>
+                <li>Stronger performance follow-up</li>
+                <li>More credible pipeline review</li>
+              </ul>
+            </article>
+
+            <article class="panel reveal delay-5">
+              <div class="tag">5</div>
+              <h3>Better quote execution</h3>
+              <p>
+                A new quote PDF and direct sending from Salesforce reduce manual work
+                and improve responsiveness and professionalism in customer communication.
+              </p>
+              <ul>
+                <li>Faster turnaround to customers</li>
+                <li>Better client interaction traceability</li>
+                <li>Better reportability of quote activity</li>
+                <li>Less work outside Salesforce</li>
+                <li>More consistent customer-facing output</li>
+              </ul>
+            </article>
+
+            <article class="panel reveal delay-5">
+              <div class="tag">Impact</div>
+              <h3>What sales teams gain</h3>
+              <p>
+                The redesign matters because it simplifies day-to-day execution, not because
+                it introduces more system complexity.
+              </p>
+              <ul>
+                <li>No more Excel-based work for the core flow</li>
+                <li>Less unnecessary back-and-forth with CTI and Master Data</li>
+                <li>Fewer manual handoffs</li>
+                <li>Better client interaction traceability and reportability</li>
+                <li>Clearer understanding of incoming revenue</li>
+                <li>Better data consistency</li>
+                <li>Better management reporting</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section>
+          <div class="quote-banner reveal delay-2">
+            <p>
+              Salesforce is now becoming a tool that links commercial intent with actual
+              commercial outcome.
+            </p>
+          </div>
+        </section>
+
+        <section>
+          <div class="section-heading reveal delay-2">
+            <div>
+              <div class="eyebrow">What is next</div>
+              <h2>The next phase is value capture, not feature noise.</h2>
+            </div>
+            <p>
+              The focus now is to make the delivered model land well in the business,
+              continue usability improvements where needed, and strengthen reporting around
+              the newly standardized process.
+            </p>
+          </div>
+
+          <div class="cards">
+            <article class="panel reveal delay-2">
+              <div class="tag">In the pipe</div>
+              <h3>Committed next steps</h3>
+              <ul>
+                <li>Drive global adoption so sales teams fully shift into Salesforce</li>
+                <li>Roll out and stabilize adoption of the new Opportunity-to-Quote model</li>
+                <li>Continue usability improvements where they slow sales execution</li>
+                <li>Strengthen reporting and management visibility</li>
+                <li>Embed the new operating model across teams</li>
+              </ul>
+            </article>
+
+            <article class="panel reveal delay-3">
+              <div class="tag">Deployment logic</div>
+              <h3>Controlled deployment, not experimentation</h3>
+              <p>
+                The operating model is straightforward: standardize first, release to
+                production once stable, then drive adoption through rollout.
+              </p>
+            </article>
+          </div>
+
+          <div class="timeline reveal delay-4">
+            <div class="timeline-grid">
+              <div class="timeline-step">
+                <span>1</span>
+                <h3>Design</h3>
+                <p>Clarify the process and standardize the commercial model first.</p>
+              </div>
+              <div class="timeline-step">
+                <span>2</span>
+                <h3>Stabilize</h3>
+                <p>Validate that the operating flow is reliable before wider use.</p>
+              </div>
+              <div class="timeline-step">
+                <span>3</span>
+                <h3>Deploy</h3>
+                <p>Release to production once it is ready to support business usage.</p>
+              </div>
+              <div class="timeline-step">
+                <span>4</span>
+                <h3>Adopt</h3>
+                <p>Drive rollout so the business captures the value consistently.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="footer-card reveal delay-5">
+          <div>
+            <div class="eyebrow">Bottom line</div>
+            <h2>Where this leaves Linxens now</h2>
+            <p>
+              Salesforce is becoming more useful as an operational sales tool and more
+              credible as a management visibility tool. The current step is meaningful
+              because it improves both daily execution and management confidence.
+            </p>
+          </div>
+          <div>
+            <h3>Expected business outcome</h3>
+            <ul>
+              <li>More speed in the commercial process</li>
+              <li>More consistency in execution</li>
+              <li>More visibility from opportunity to revenue</li>
+              <li>Better confidence in Salesforce as a business platform</li>
+            </ul>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+  </html>
